@@ -9,7 +9,7 @@ const veryfyToken = (req, res, next) => {
     if (!token) return res.status(401).json({ success: false, message: 'Không có token mà muốn đi tiếp á 🤔' });
 
     try {
-        const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        const decodedToken = jwt.verify(token, '660440444022208808033' /*process.env.ACCESS_TOKEN_SECRET*/);
         console.log(decodedToken);
         req.userId = decodedToken.userid;
         next();

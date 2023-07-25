@@ -55,7 +55,10 @@ class AuthController {
                 const hashedPassword = await argon2.hash(password);
                 const newUser = new User({ username, password: hashedPassword, email });
                 await newUser.save();
-                const accsessToken = jwt.sign({ userid: newUser._id }, process.env.ACCESS_TOKEN_SECRET);
+                const accsessToken = jwt.sign(
+                    { userid: newUser._id },
+                    '660440444022208808033' /*process.env.ACCESS_TOKEN_SECRET*/,
+                );
                 res.json({ success: true, token: accsessToken, message: 'tạo thành công' });
             }
         } catch (error) {
@@ -75,7 +78,10 @@ class AuthController {
                 if (!passwordValid) {
                     res.status(400).json({ success: false, message: 'Sai mật khẩu' });
                 } else {
-                    const accsessToken = jwt.sign({ userid: user._id }, process.env.ACCESS_TOKEN_SECRET);
+                    const accsessToken = jwt.sign(
+                        { userid: user._id },
+                        '660440444022208808033' /*process.env.ACCESS_TOKEN_SECRET*/,
+                    );
                     res.json({ success: true, token: accsessToken, message: 'Đăng nhập thành công' });
                 }
             }
