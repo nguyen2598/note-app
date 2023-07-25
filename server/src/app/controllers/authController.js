@@ -34,6 +34,16 @@ const jwt = require('jsonwebtoken');
 //     // Logic để tạo mã xác nhận ở đây
 // }
 class AuthController {
+    async checkUser(req, res, next) {
+        try {
+            const user = await User.findById(req.userId).select('-password');
+            if (!user) return res.status(403).json({ success: false, message: 'Không tìm thấy user' });
+            else res.json({ success: true, user: user });
+        } catch (error) {
+            res.status(550).json({ success: false, message: 'Lỗi server' });
+        }
+    }
+
     async register(req, res, next) {
         const { username, password, email } = req.body;
         try {
@@ -58,7 +68,7 @@ class AuthController {
         try {
             const user = await User.findOne({ username: username });
             if (!user) {
-                res.status(400).json({ success: false, message: 'Tài khoản không tồn tại' });
+                res.status(404).json({ success: false, message: 'Tài khoản không tồn tại' });
             } else {
                 // Kiểm tra xem đúng mật khẩu không
                 const passwordValid = await argon2.verify(user.password, password);

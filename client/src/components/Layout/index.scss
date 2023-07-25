@@ -1,0 +1,26 @@
+.nav .link {
+    text-decoration: none;
+    color: #5f5e5e;
+    font-weight: 700;
+}
+
+.nav .link:hover {
+    color: #9c0b94;
+}
+
+.user {
+    position: relative;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+.navMenu {
+    position: absolute;
+    top: 100%;
+    right: -4px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+}

@@ -3,7 +3,7 @@ const postRouter = require('./post');
 
 function route(app) {
     app.use('/auth', authRouter);
-    app.use('/post', postRouter);
+    app.use('/posts', postRouter);
 }
 
 module.exports = route;

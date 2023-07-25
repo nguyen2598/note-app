@@ -10,12 +10,12 @@ class PostController {
             const newPost = new Post({
                 title,
                 description,
-                url,
-                status: status || 'TO LEARN',
+                url: !url.startsWith('https://') ? 'https://' + url : url,
+                status: status || 'LEARNING',
                 user: req.userId, // Lấy từ middleware auth,
             });
             await newPost.save();
-            res.json({ succes: true, message: 'Tạo bài viết thành công', post: newPost });
+            res.json({ success: true, message: 'Tạo bài viết thành công', post: newPost });
         } catch (error) {
             res.status(550).json({ success: false, message: 'Lỗi server' });
         }
@@ -27,7 +27,8 @@ class PostController {
     async getAll(req, res, next) {
         try {
             const posts = await Post.find({ user: req.userId }).populate('user', ['username']); // Lấy thêm dữ liệu bảng user cho vào ( chỉ cho thêm uername)
-            res.json({ succes: true, message: `Api userId ${req.userId}`, posts: posts });
+
+            res.json({ success: true, message: `Api userId ${req.userId}`, posts: posts });
         } catch (error) {
             res.status(550).json({ success: false, message: 'Lỗi server' });
         }
@@ -51,9 +52,9 @@ class PostController {
                 new: true,
             }); //{new:true} để tar về cái mới update còn ko có nó sẽ tar về cái cũ
             if (!updatedPost) {
-                res.status(404).json({ succes: false, message: 'Không update được bài viết' });
+                res.status(404).json({ success: false, message: 'Không update được bài viết' });
             } else {
-                res.json({ succes: true, message: 'Update bài viết thành công', post: updatedPost });
+                res.json({ success: true, message: 'Update bài viết thành công', post: updatedPost });
             }
         } catch (error) {
             res.status(550).json({ success: false, message: 'Lỗi server' });
@@ -67,9 +68,9 @@ class PostController {
         try {
             const deletedPost = await Post.findOneAndDelete({ _id: req.params.id, user: req.userId });
             if (!deletedPost) {
-                res.status(404).json({ succes: false, message: 'Không xóa được bài viết' });
+                res.status(404).json({ success: false, message: 'Không xóa được bài viết' });
             } else {
-                res.json({ succes: true, message: 'Xóa bài viết thành công', post: deletedPost });
+                res.json({ success: true, message: 'Xóa bài viết thành công', post: deletedPost });
             }
         } catch (error) {
             res.status(550).json({ success: false, message: 'Lỗi server' });

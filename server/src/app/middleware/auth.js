@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const veryfyToken = (req, res, next) => {
     const authheader = req.header('Authorization');
     const token = authheader && authheader.split(' ')[1];
+    console.log('token', authheader, req.headers['Authorization']);
     if (!token) return res.status(401).json({ success: false, message: 'Không có token mà muốn đi tiếp á 🤔' });
 
     try {

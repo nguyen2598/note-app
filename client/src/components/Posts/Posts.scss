@@ -1,0 +1,115 @@
+.singlePost {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 8px 16px;
+}
+.success {
+    border: 2px solid #198754;
+    box-shadow: 0 4px 2px rgba(47, 255, 75, 0.2);
+}
+.err {
+    border: 2px solid rgb(193, 178, 15);
+    box-shadow: 0 4px 2px rgba(193, 160, 15, 0.2);
+}
+.warn {
+    border: 2px solid #ff0000;
+    box-shadow: 0 4px 2px rgba(214, 20, 10, 0.2);
+}
+
+.singlePostLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.title {
+    color: #535252;
+    font-size: 18px;
+}
+
+.status {
+    padding: 8px 16px;
+    background-color: #198754;
+    border-radius: 16px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10px;
+    width: 90px;
+}
+
+.success .status {
+    background-color: #198754;
+}
+.err .status {
+    background-color: rgb(193, 178, 15);
+}
+.warn .status {
+    background-color: #ff0000;
+}
+
+.singlePostRight {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.youtube {
+    color: #ff0000;
+}
+
+.pen {
+    color: #00ff00;
+    cursor: pointer;
+}
+
+.bin {
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.addForm {
+    max-width: 480px;
+    width: 100%;
+    position: absolute;
+    z-index: 99999;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    // padding: 10px 20px;
+    margin: 24px 0;
+}
+
+.formGroup input {
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    padding: 10px 16px;
+    outline: none;
+    font-size: 12px;
+}
+.formGroup textarea {
+    width: 100%;
+    resize: both;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    padding: 10px 16px;
+    outline: none;
+    font-size: 12px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.closeAdd_Update {
+    cursor: pointer;
+}

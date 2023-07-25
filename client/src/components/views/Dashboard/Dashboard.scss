@@ -1,0 +1,45 @@
+.Dashboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post {
+    width: calc(100% / 3);
+    padding: 10px;
+    min-height: 160px;
+}
+
+.addPost {
+    position: fixed;
+    bottom: 24px;
+    right: 16px;
+    cursor: pointer;
+    color: green;
+}
+
+.addPost:hover {
+    transform: scale(1.1);
+}
+
+.formPost {
+    position: fixed;
+    inset: 0;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 640px) and (max-width: 1000px) {
+    .post {
+        width: 50%;
+    }
+}
+
+@media (max-width: 639px) {
+    .post {
+        width: 100%;
+    }
+}
