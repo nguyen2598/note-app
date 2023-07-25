@@ -12,7 +12,7 @@ router.post('/', verifyToken, postController.create);
 //route GET /@posts
 // @get post
 // access Private : phải login
-router.get('/', verifyToken, postController.getAll);
+router.get('/', verifyToken, postController.get);
 
 //route PUT /@posts
 // @get put

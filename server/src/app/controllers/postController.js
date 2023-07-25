@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-
+const PAGE_SIZE = 8;
 class PostController {
     //route POST /@posts
     // @create post
@@ -24,11 +24,34 @@ class PostController {
     //route GET /@posts
     // @get post
     // access Private : phải login
-    async getAll(req, res, next) {
+    async get(req, res, next) {
         try {
-            const posts = await Post.find({ user: req.userId }).populate('user', ['username']); // Lấy thêm dữ liệu bảng user cho vào ( chỉ cho thêm uername)
-
-            res.json({ success: true, message: `Api userId ${req.userId}`, posts: posts });
+            let page = req.query.page;
+            let limit = req.query.limit;
+            let totalPost = await Post.countDocuments({});
+            if (page && limit) {
+                limit = parseInt(limit) > 0 ? parseInt(limit) : PAGE_SIZE;
+                let totalPage = Math.ceil(totalPost / parseInt(limit));
+                page = parseInt(page) <= 0 ? 1 : parseInt(page) > totalPage ? totalPage : parseInt(page);
+                const nextNumber = (page - 1) * limit;
+                const posts = await Post.find({ user: req.userId })
+                    .populate('user', ['username']) // Lấy thêm dữ liệu bảng user cho vào ( chỉ cho thêm uername)
+                    .skip(nextNumber) // hàm này có sẵn trong mongose dùng để bỏ qua so ptu
+                    .limit(limit);
+                res.json({ success: true, message: `Api userId ${req.userId}`, totalPage, posts: posts });
+            } else if (page) {
+                let totalPage = Math.ceil(totalPost / parseInt(PAGE_SIZE));
+                page = parseInt(page) > 0 ? parseInt(page) : 1;
+                const nextNumber = (page - 1) * PAGE_SIZE;
+                const posts = await Post.find({ user: req.userId })
+                    .populate('user', ['username']) // Lấy thêm dữ liệu bảng user cho vào ( chỉ cho thêm uername)
+                    .skip(nextNumber) // hàm này có sẵn trong mongose dùng để bỏ qua so ptu
+                    .limit(PAGE_SIZE);
+                res.json({ success: true, message: `Api userId ${req.userId}`, totalPage, posts: posts });
+            } else {
+                const posts = await Post.find({ user: req.userId }).populate('user', ['username']); // Lấy thêm dữ liệu bảng user cho vào ( chỉ cho thêm uername)
+                res.json({ success: true, message: `Api userId ${req.userId}`, totalPost, posts: posts });
+            }
         } catch (error) {
             res.status(550).json({ success: false, message: 'Lỗi server' });
         }

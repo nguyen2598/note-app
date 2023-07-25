@@ -2,12 +2,14 @@ import axiosClient from '../axiosClient';
 import { postLoaderError, postLoaderSuccess, addPost, deletePost, updatePost } from '../store/slice/postSlice';
 import store from '../store/store';
 const postApi = {
-    async getPosts(params) {
-        const url = '/posts';
+    async getPosts(page) {
+        // console.log('page', page);
+        const url = `/posts?page=${page ? page : 1}`;
         try {
             const response = await axiosClient.get(url);
             if (response.success) {
-                store.dispatch(postLoaderSuccess(response.posts));
+                // console.log(response);
+                store.dispatch(postLoaderSuccess({ posts: response.posts, total: response.totalPage }));
             }
         } catch (error) {
             store.dispatch(postLoaderError(error));

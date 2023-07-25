@@ -1,6 +1,7 @@
 .Dashboard {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .post {
@@ -30,6 +31,32 @@
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
+}
+.pagination {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    gap: 16px;
+}
+
+.pagination svg {
+    cursor: pointer;
+}
+
+.paginNumber {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+}
+
+.pagi {
+    transform: scale(1.3);
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 @media (min-width: 640px) and (max-width: 1000px) {

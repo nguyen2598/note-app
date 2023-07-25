@@ -3,22 +3,27 @@ import { createSlice } from '@reduxjs/toolkit';
 const postSlice = createSlice({
     name: 'post',
     initialState: {
+        total: 0,
         post: null,
         posts: [],
         postsLoading: true,
     },
     reducers: {
         setPostToUpdate(state, action) {
+            console.log('up');
             return {
                 ...state,
                 post: state.posts.find((post) => post._id === action.payload),
             };
         },
         postLoaderSuccess(state, action) {
-            state.posts = action.payload;
+            console.log('sus');
+            state.posts = action.payload.posts;
+            state.total = action.payload.total;
             state.postsLoading = false;
         },
         postLoaderError(state, action) {
+            console.log('err');
             return {
                 ...state,
                 postsLoading: true,

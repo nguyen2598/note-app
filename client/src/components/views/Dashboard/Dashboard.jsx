@@ -6,12 +6,17 @@ import AddPost from '../../Posts/AddPost';
 import './Dashboard.scss';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import UpdattePost from '../../Posts/UpdatePost';
+import { FcNext, FcPrevious } from 'react-icons/fc';
 export default function Dashboard() {
     console.log('co vao das');
-    const { posts, postsLoading } = useSelector((state) => state.post);
+    const { posts, postsLoading, total } = useSelector((state) => state.post);
     const [isShowAddPost, setIsShowAddPost] = useState(false);
     const [isShowUpdatePost, setIsShowUpdatePost] = useState(false);
-
+    const [page, setPage] = useState(1);
+    console.log(total);
+    useEffect(() => {
+        postApi.getPosts(page);
+    }, [page]);
     useEffect(() => {
         postApi.getPosts();
     }, []);
@@ -22,6 +27,22 @@ export default function Dashboard() {
                     <SinglePost post={post} showEdit={setIsShowUpdatePost} />
                 </div>
             ))}
+            {total > 1 ? (
+                <div className="pagination">
+                    <div onClick={() => setPage((prev) => prev - 1)} className={`pagi ${page > 1 ? '' : 'disabled'}`}>
+                        <FcPrevious />
+                    </div>
+                    <div className="paginNumber">{page}</div>
+                    <div
+                        onClick={() => setPage((prev) => prev + 1)}
+                        className={`pagi ${page < total ? '' : 'disabled'}`}
+                    >
+                        <FcNext />
+                    </div>
+                </div>
+            ) : (
+                ''
+            )}
             <div className="addPost" onClick={() => setIsShowAddPost(true)}>
                 <BsPlusCircleFill size={40} />
             </div>
