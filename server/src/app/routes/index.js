@@ -5,7 +5,7 @@ function route(app) {
     app.use('/auth', authRouter);
     app.use('/posts', postRouter);
     app.use('/', (req, res, next) => {
-        res.send('server này có chạy nhá-2');
+        res.send('server này có chạy nhá-3');
     });
 }
 
