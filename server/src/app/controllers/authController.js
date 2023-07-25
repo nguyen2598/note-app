@@ -59,7 +59,7 @@ class AuthController {
                 res.json({ success: true, token: accsessToken, message: 'tạo thành công' });
             }
         } catch (error) {
-            res.status(550).json({ success: false, message: 'Lỗi server' });
+            res.status(550).json({ success: false, message: 'Lỗi server regis' });
         }
     }
 
