@@ -22,11 +22,13 @@ export default function Dashboard() {
     }, []);
     return (
         <div className="Dashboard">
-            {posts?.map((post, index) => (
-                <div className="post" key={index}>
-                    <SinglePost post={post} showEdit={setIsShowUpdatePost} />
-                </div>
-            ))}
+            <div className="posts">
+                {posts?.map((post, index) => (
+                    <div className="post" key={index}>
+                        <SinglePost post={post} showEdit={setIsShowUpdatePost} />
+                    </div>
+                ))}
+            </div>
             {total > 1 ? (
                 <div className="pagination">
                     <div onClick={() => setPage((prev) => prev - 1)} className={`pagi ${page > 1 ? '' : 'disabled'}`}>

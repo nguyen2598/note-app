@@ -18,9 +18,15 @@
     position: absolute;
     top: 100%;
     right: -4px;
-    width: 120px;
+    // width: 220px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 16px;
+    background-color: #f0eded;
+    padding: 20px;
+    justify-content: center;
+}
+.name_user {
+    white-space: nowrap;
 }

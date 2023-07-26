@@ -30,7 +30,7 @@ export default function NavBar() {
                 </div>
                 {isMenu ? (
                     <div className="navMenu">
-                        <div className="name_user">Welcome {user.username}</div>
+                        <div className="name_user"> {user.username}</div>
                         <button onClick={logout}>Logout </button>
                     </div>
                 ) : (

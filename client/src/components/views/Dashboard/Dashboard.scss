@@ -1,7 +1,12 @@
 .Dashboard {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+}
+.posts {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .post {
@@ -35,6 +40,7 @@
 .pagination {
     display: flex;
     align-items: center;
+    margin: auto;
     margin-top: 16px;
     gap: 16px;
 }
